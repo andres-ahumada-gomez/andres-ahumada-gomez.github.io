@@ -1,2 +1,2 @@
-# andres-hmd-gmz.github.io
-Hola, soy Andrés.
+# Andrés' Math Webpage
+Hola, soy Andrés Ahumada Gómez.
