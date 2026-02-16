@@ -250,3 +250,22 @@ h3{
   object-fit: contain;
   border-radius: 50%; /* opcional: circular */
 }
+
+.hero-title {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* espacio entre texto e imagen */
+}
+
+.hero-photo {
+  width: 70px;        /* tamaño de la foto */
+  height: 70px;
+  border-radius: 50%; /* circular */
+  object-fit: cover;
+}
+@media (max-width: 600px) {
+  .hero-title {
+    flex-direction: column;
+    text-align: center;
+  }
+}
