@@ -1,5 +1,5 @@
 /* =========================
-   Andrés Ahumada Gómez — styles.css
+   Andrés Ahumada Gómez — styles.css (corregido)
    ========================= */
 
 :root{
@@ -96,7 +96,7 @@ h3{
   h1 .accent{ white-space: normal; }
 }
 
-/* Hero */
+/* Hero (GRID) */
 .hero{
   display:grid;
   grid-template-columns: 1.2fr .8fr;
@@ -105,8 +105,22 @@ h3{
   padding: 18px 0 8px;
 }
 
+/* B) Ajustes: contenido + foto a la derecha */
+.hero-content{ min-width: 0; }
+
+.hero-photo{
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  justify-self: end;
+}
+
 @media (max-width: 820px){
   .hero{ grid-template-columns: 1fr; }
+  .hero-photo{ justify-self: center; max-width: 240px; }
 }
 
 /* Buttons */
@@ -189,11 +203,11 @@ h3{
   font-size: .9rem;
 }
 
-/* Avatar (opcional) */
+/* Avatar (opcional) — BONUS: corregido height */
 .avatar{
   width: 100%;
-  heigth: 100vh;
-  heigth: 100svh;
+  height: 100vh;
+  height: 100svh;
   border-radius: 0;
   object-fit: cover;
   border: 1px solid var(--border);
@@ -230,46 +244,22 @@ h3{
 }
 
 @media (max-width: 820px){
-  .full-width-image{
-    width: 100vw;
-  }
+  .full-width-image{ width: 100vw; }
 }
 
+/* Brand con logo */
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px; /* espacio entre imagen y texto */
+  gap: 8px;
   font-weight: bold;
   text-decoration: none;
   color: inherit;
 }
 
 .brand-logo {
-  width: 28px;       /* tamaño pequeño */
+  width: 28px;
   height: 28px;
   object-fit: contain;
-  border-radius: 50%; /* opcional: circular */
+  border-radius: 50%;
 }
-
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-}
-
-.hero-content {
-  flex: 1;
-}
-
-.hero-image {
-  flex: 1;
-  text-align: right;
-}
-
-.hero-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
-}
-
