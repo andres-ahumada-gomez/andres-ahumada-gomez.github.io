@@ -251,31 +251,3 @@ h3{
   border-radius: 50%; /* opcional: circular */
 }
 
-.hero{
-  padding: 18px 0 8px;
-}
-
-/* el grid real */
-.hero-grid{
-  display:grid;
-  grid-template-columns: 1.2fr .8fr;
-  align-items:center;
-  gap:24px;
-}
-
-.hero-image{
-  justify-self:end;   /* manda la imagen a la derecha */
-}
-
-.hero-image img{
-  width:100%;
-  max-width:420px;    /* súbelo de 320 para que se vea claro */
-  height:auto;
-  display:block;
-}
-
-@media (max-width: 820px){
-  .hero-grid{ grid-template-columns: 1fr; }
-  .hero-image{ justify-self:center; }
-}
-
