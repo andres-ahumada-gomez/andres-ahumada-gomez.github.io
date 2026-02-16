@@ -250,6 +250,7 @@ h3{
   object-fit: contain;
   border-radius: 50%; /* opcional: circular */
 }
+
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -257,11 +258,14 @@ h3{
   gap: 2rem;
 }
 
+.hero-text {
+  text-align: left;
+}
+
 .hero-image img {
   width: 100%;
-  max-width: 400px;
+  max-width: 350px;
   height: auto;
-  border-radius: 12px;
 }
 
 @media (max-width: 768px) {
@@ -270,7 +274,7 @@ h3{
     text-align: center;
   }
 
-  .hero-image {
-    order: -1; /* imagen arriba en móvil si quieres */
+  .hero-image img {
+    margin: 0 auto;
   }
 }
