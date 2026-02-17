@@ -110,10 +110,10 @@ h3{
 /* Contenedor de la imagen: controla tamaño y recorte */
 .hero-media{
   justify-self: end;
-  width: 100%;
+  width: auto; /*100%*/
   max-width: 420px;
-  height: min(460px, 60vh);   /* <- clave: evita que sea gigante */
-  border-radius: 12px;
+  height: auto; /*min(460px, 60vh);   /* <- clave: evita que sea gigante */
+  border-radius: 2px;
   overflow: hidden;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
