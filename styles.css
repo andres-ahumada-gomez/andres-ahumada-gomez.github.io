@@ -96,7 +96,7 @@ h3{
   h1 .accent{ white-space: normal; }
 }
 
-/* Hero (GRID) — corregido para que la foto no se coma el texto */
+/* Hero */
 .hero{
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
@@ -105,39 +105,39 @@ h3{
   padding: 18px 0 8px;
 }
 
-.hero-content{
-  min-width: 0; /* clave para que el texto no se “aplastre” raro */
+.hero-content{ min-width: 0; }
+
+/* Contenedor de la imagen: controla tamaño y recorte */
+.hero-media{
+  justify-self: end;
+  width: 100%;
+  max-width: 420px;
+  height: min(460px, 60vh);   /* <- clave: evita que sea gigante */
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background: var(--panel);
 }
 
 .hero-photo{
   width: 100%;
-  height: auto;
-  max-width: 420px;
-  justify-self: end;
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  height: 100%;
+  object-fit: cover;          /* recorta para llenar el contenedor */
+  object-position: center;
+  display: block;
 }
 
 /* Móvil */
 @media (max-width: 820px){
   .hero{
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
     gap: 18px;
-    padding-bottom: 12px;   /* separa del siguiente bloque */
   }
-
-  .hero-photo{
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: 220px !important;     /* fuerza altura para que NO “inunde” la página */
-    object-fit: cover !important; /* recorta sin deformar */
-    justify-self: stretch !important;
-
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
+  .hero-media{
+    justify-self: center;
+    max-width: 520px;
+    height: 320px;
   }
 }
 
