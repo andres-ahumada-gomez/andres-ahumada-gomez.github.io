@@ -105,7 +105,9 @@ h3{
   padding: 18px 0 8px;
 }
 
-.hero-content{ min-width: 0; }
+.hero-content{ min-width: 0; 
+             padding-right: 20px;
+}
 
 /* Contenedor de la imagen: controla tamaño y recorte */
 .hero-media{
