@@ -115,9 +115,6 @@ h3{
   height: auto; /*min(460px, 60vh);   /* <- clave: evita que sea gigante */
   border-radius: 2px;
   overflow: hidden;
-  border: 0px solid var(--border);
-  box-shadow: var(--bg);
-  background: var(--bg);
   object-fit: contain;
   line-height: 0;
 }
