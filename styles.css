@@ -302,3 +302,23 @@ h3{
   object-fit: contain;
   border-radius: 50%;
 }
+
+.sobre-mi-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.sobre-mi-texto {
+  flex: 2;
+}
+
+.sobre-mi-imagen {
+  flex: 1;
+}
+
+.sobre-mi-imagen img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
