@@ -341,8 +341,8 @@ h3{
 }
 
 .social-icons img {
-  width: 32px;
-  height: 32px;
+  width: 55px;
+  height: 55px;
   object-fit: contain;
 }
 
@@ -375,5 +375,5 @@ h3{
 .scholar { background: #4285F4; }
 .researchgate { background: #00CCBB; }
 .wordpress    { background: #21759B; }
-.cunef        { background: #8C1D40; } 
+.cunef        { background: #FFFFFF; } 
 .arxiv {background: #FFFFFF ;}
