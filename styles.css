@@ -349,7 +349,7 @@ h3{
 .social-icons a {
   width: 55px;
   height: 55px;
-  border-radius: 14px;
+  border-radius: 7px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -368,12 +368,12 @@ h3{
 }
 
 /* Colores oficiales */
-.youtube { background: #FF0000; }
-.linkedin { background: #0077B5; }
-.instagram { background: #E1306C; }
-.orcid { background: #A6CE39; }
+.youtube { background: #FFFFFF; }
+.linkedin { background: #FFFFFF; }
+.instagram { background: #FFFFFF; }
+.orcid { background: #FFFFFF; }
 .scholar { background: #FFFFFF; }
-.researchgate { background: #60D1AE; }
+.researchgate { background: #FFFFFF; }
 .wordpress    { background: #FFFFFF; }
 .cunef        { background: #FFFFFF; } 
 .arxiv {background: #FFFFFF ;}
