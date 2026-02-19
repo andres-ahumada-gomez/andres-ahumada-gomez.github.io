@@ -334,6 +334,11 @@ h3{
   text-align: center;
 }
 
+.social-icons img {
+  width: 32px;
+  height: 32px;
+}
+
 .social-icons {
   display: flex;
   justify-content: center;
