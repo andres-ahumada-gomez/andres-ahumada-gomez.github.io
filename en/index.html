@@ -1,14 +1,17 @@
 <!-- =========================
    Andrés Ahumada Gómez — Página en inglés
    ========================= -->
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Andrés' Math Site</title>
-  <meta name="description" content="Professional Webpage of Andrés Ahumada Gómez" />
-   <link href="https://fonts.googleapis.com/css2?family=Latin+Modern+Roman&display=swap" rel="stylesheet">
+  <title>Math Site of Andrés</title>
+  <meta name="description" content="Web profesional de Andrés Ahumada Gómez." />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=CMU+Serif&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono/index.css">
   <link rel="stylesheet" href="/styles.css" />
   <link rel="alternate" hreflang="en" href="https://andres-hmd-gmz.github.io/en/" />
 <link rel="alternate" hreflang="es" href="https://andres-hmd-gmz.github.io/es/" />
@@ -17,77 +20,162 @@
 <body>
   <header class="site-header">
   <a class="brand" href="/">
-  <img src="/andres-esf2.png" alt="Logo" class="brand-logo">
+  <img src="/imgs/andres-esf2.png" alt="Logo" class="brand-logo">
+     
   Andrés Ahumada Gómez
   </a>
   <nav class="nav">
-    <a href="#about">About</a>
-    <a href="/projects.html">Projects</a>
-    <a href="#contact">Contact</a>
-    <span style="margin-left:10px; opacity:.6;">|</span>
+  <a href="#about-me">About me</a>
+  <a href="#contact">Contact</a>
+
+  <span class="nav-sep" aria-hidden="true">|</span>
+
+  <div class="lang">
     <a class="active" href="/en/">EN</a>
     <a href="/es/">ES</a>
-  </nav>
+  </div>
+</nav>
 </header>
-  <img class="full-width-image" src="/andres_pizarron.png" alt="Foto de Andrés Ahumada Gómez">
   <main class="container">
-    <section class="hero">
-      <div>
-        <h1>Hola, soy <span class="accent">Andrés Ahumada Gómez</span>.</h1>
+    <div>
+    <h1>Hello, I am <span class="accent">Andrés Ahumada Gómez</span>.   </h1>
 
-        <p class="lead">
-          Profesor en CUNEF. Interesado en docencia, investigación aplicada y análisis de datos.
-        </p>
+    <p class="lead">
+      Geometer and professor in CUNEF Universidad
+    </p>
+      <div class="buttons">
 
-        <div class="cta">
-          <a class="button" href="projects.html">Ver proyectos</a>
-          <a class="button button-ghost" href="#contacto">Contactar</a>
-        </div>
+       <a href="/en/curriculum.html">Curriculum</a>
+      <a href="/en/investigacion.html">Research</a>
+      <a href="/en/docencia.html">Teaching</a>
+      <a href="/en/archivo.html">Archive</a>
+      
+    </div>
 
-        <ul class="links">
-          <li>
-            <a href="mailto:andres.ahumada@cunef.edu">
-              andres.ahumada@cunef.edu
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
+  </div>
 
-    <section id="sobre-mi" class="section">
-      <h2>Sobre mí</h2>
-      <p>
-        Soy profesor en CUNEF, con interés en la formación universitaria, el análisis cuantitativo
-        y el desarrollo de proyectos académicos y profesionales.
+       <section id="about-me" class="section">
+  <h2>About me</h2>
+
+  <div class="sobre-mi-content">
+    <div class="sobre-mi-texto">
+      <p style="text-align: justify;">
+         I am assistant professor in the Department of Mathematics at <a href="https://www.cunef.edu">CUNEF Universidad</a> in Madrid, Spain.
+              </p>
+      <p style="text-align: justify;">
+        I am mathematician from <a href="https://www.fciencias.unam.mx">Facultad de Ciencias</a> of the <a href="https://www.unam.mx">Universidad Nacional Autónoma de México</a>. I wrote my PhD Thesis "Actions on Spaces with Bounded Curvature" with supervision of <a href="https://www.durham.ac.uk/staff/fernando-galaz-garcia/">Dr. Fernando Galaz García</a>. 
+      </p>  
+       <p style="text-align: justify;">
+         In geometry I have found a way of thinking and what interests me most is seeing how we can obtain topological information from Riemannian geometry (connection, geodesics or curvature) or metric geometry (angles, distances or comparison).
       </p>
+      <p style="text-align: justify;">
+         By the way, I've always had a special fondness for spheres.
+      </p>
+    </div>
 
-      <div class="grid">
+    <div class="sobre-mi-imagen">
+      <img src="/imgs/yo.png"
+           alt="Foto de Andrés Ahumada Gómez">
+    </div>
+  </div>
+       </section>
+     <section class="section">
+        <div class="grid">
         <div class="card">
-          <h3>Áreas de trabajo</h3>
+          <h3>Research interests</h3>
           <ul>
-            <li>Docencia universitaria</li>
-            <li>Investigación aplicada</li>
-            <li>Análisis de datos</li>
+            <li>Riemannian geometry</li>
+            <li>Metric geometry</li>
+            <li>Theory of Lie groups</li>
+             <li>Topological data analysis</li>
+             <li>Equivariant neural networks</li>
           </ul>
         </div>
 
         <div class="card">
-          <h3>Herramientas</h3>
+          <h3>Classes</h3>
           <ul>
-            <li>R / Python</li>
-            <li>Econometría</li>
-            <li>GitHub y recursos digitales</li>
+            <li>Programming in R</li>
+            <li>Operations research</li>
           </ul>
         </div>
       </div>
     </section>
+<section class="social-section" id="contacto">
+  <h2>Social networks</h2>
 
-    <section id="contacto" class="section">
-      <h2>Contacto</h2>
-      <p>
-        Puedes escribirme a:
+  <div class="social-icons">
+
+     
+<!-- Perfil CUNEF -->
+<a href="https://www.cunef.edu/claustro-e-investigacion/ahumada-gomez-andres/" class="cunef" target="_blank">
+  <img src="/logos/CUNEF.png" alt="Perfil CUNEF">
+</a>
+
+     <!-- arXiv -->
+   <a href="https://arxiv.org/a/ahumadagomez_a_1.html" class="arxiv" target="_blank">
+      <img src="/logos/arxiv.png" alt="Perfil arXiv">
+    </a>
+
+      <!-- Google Scholar -->
+    <a href="https://scholar.google.com/citations?user=Dg5pxIkAAAAJ&hl=es" class="scholar" target="_blank">
+      <img src="/logos/Google_Scholar.png" alt="Perfil Google Scholar">
+    </a>
+
+       <!-- ResearchGate -->
+<a href="https://www.researchgate.net/profile/Andres-Ahumada-Gomez" class="researchgate" target="_blank">
+  <img src="/logos/ResearchGate.png" alt="Perfil ResearchGate">
+</a>
+      <!-- ORCID -->
+    <a href="https://orcid.org/0000-0003-2452-4653" class="orcid" target="_blank">
+      <img src="/logos/ORCID.png" alt="Perfil ORCID">
+    </a>
+
+
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@andres.matematico" class="youtube" target="_blank">
+      <img src="/logos/Youtube.png" alt="Perfil YouTube">
+    </a>
+
+    
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/esfera.pi/" class="instagram" target="_blank">
+      <img src="/logos/Instagram.png" alt="Perfil Instagram">
+      </svg>
+    </a>
+<!-- LinkedIn -->
+    <a href="https://www.linkedin.com/in/andrés-ahumada-gómez/" class="linkedin" target="_blank">
+      <img src="/logos/LinkedIn.png" alt="Perfil LinkedIn">
+    </a>
+
+<!-- WordPress -->
+<a href="https://andresmatem.wordpress.com" class="wordpress" target="_blank">
+  <img src="/logos/Wordpress.png" alt="Perfil Wordpress">
+</a>
+
+  </div>
+</section>
+   <section class="section">
+<div class="grid">
+      <h2>Email</h2>
+   <h2>
+   Office
+   </h2>
+   
+   </div>
+   <div class="grid">
+   <p>
         <a href="mailto:andres.ahumada@cunef.edu">andres.ahumada@cunef.edu</a>
+      <a href="mailto:andres.hmd.gmz@gmail.com">andres.hmd.gmz@gmail.com</a>
       </p>
+      <p>
+   
+   Building D 3-18.1<br>
+   Departament of Mathematics<br>
+   CUNEF Universidad<br>
+   Calle de Almansa, 101, 28040<br>
+   Madrid, España</p>
+   </div>
     </section>
   </main>
 
