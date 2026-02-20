@@ -86,6 +86,37 @@ a:hover{
   color: var(--text);
 }
 
+/* Separador visible solo en desktop */
+.nav-sep{
+  margin-left:10px;
+  opacity:.6;
+}
+
+/* Nav en general */
+.nav{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;      /* permite salto de línea */
+  gap: 10px;
+}
+
+/* Grupo de idiomas */
+.nav .lang{
+  display: flex;
+  gap: 10px;
+}
+
+/* Móvil: ocultar barra y mandar idiomas a nueva línea */
+@media (max-width: 600px){
+  .nav-sep{ display: none; }
+
+  .nav .lang{
+    flex-basis: 100%;   /* ocupa toda la fila => baja */
+    justify-content: flex-end; /* o flex-start, como prefieras */
+    margin-top: 4px;
+  }
+}
+
 /* Typography */
 h1{
   font-size: clamp(30px, 4vw, 44px);
