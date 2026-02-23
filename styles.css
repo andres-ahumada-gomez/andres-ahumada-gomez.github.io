@@ -582,14 +582,19 @@ h3{
   display: block;
 }
 
-/* MÓVIL: reducir tamaño visual del contenido */
 @media (max-width: 900px) {
   .viewer-frame {
-    --iframe-scale: 0.85; /* zoom OUT en móvil */
+    --iframe-scale: 0.85;
+    overflow: hidden;
   }
 
   .viewer-frame iframe {
-    height: calc(70vh / var(--iframe-scale));
+    transform: scale(var(--iframe-scale));
+    transform-origin: 0 0;
+    width: calc(100% / var(--iframe-scale));
+    height: calc(min(70vh, 900px) / var(--iframe-scale));
+    border: 0;
+    display: block;
   }
 }
 
