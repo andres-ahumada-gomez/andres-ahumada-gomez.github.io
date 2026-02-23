@@ -1,1 +1,145 @@
+<!-- =========================
+   Andrés Ahumada Gómez — Archivo en español
+   ========================= -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Andrés - Archive</title>
+  <meta name="description" content="Web profesional de Andrés Ahumada Gómez." />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=CMU+Serif&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono/index.css">
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="alternate" hreflang="en" href="https://andres-hmd-gmz.github.io/en/" />
+<link rel="alternate" hreflang="es" href="https://andres-hmd-gmz.github.io/es/" />
+<link rel="alternate" hreflang="x-default" href="https://andres-hmd-gmz.github.io/" />
+   <link rel="icon" type="image/png" href="/imgs/esf.png">
+</head>
+<body>
+  <header class="site-header">
+  <a class="brand" href="/">
+  <img src="/imgs/andres-esf2.png" alt="Logo" class="brand-logo">
+     
+  Andrés Ahumada Gómez
+  </a>
+  <nav class="nav">
+  <a href="/es/index.html#sobre-mi">Sobre mí</a>
+  <a href="/es/index.html#contacto">Contacto</a>
+
+  <span class="nav-sep" aria-hidden="true">|</span>
+
+  <div class="lang">
+    <a class="active" href="/en/archivo.html">EN</a>
+    <a href="/es/archivo.html">ES</a>
+  </div>
+</nav>
+</header>
+  <main class="container">
+    <div>
+    <h1><span class="accent">Archive</span>.   </h1>
+  </div>
+
+
+  <section class="docs-component docs-component--fullbleed" id="docsComponent">
+    <aside class="docs-list">
+      <h2 class="docs-title">Documents</h2>
+
+      <button class="doc-item is-active" data-src="/docs/Curriculum.pdf#view=FitH" type="button">
+        Curriculum Vitae (February 26)
+      </button>
+
+      <button class="doc-item" data-src="/docs/SBC.pdf#view=FitH" type="button">
+        Notes on spaces with bounded curvature (Last version: sept. 25)
+      </button>
+       <button class="doc-item" data-src="/docs/Notas_de_funciones_distancia.pdf#view=FitH" type="button">
+        Notes on distance functions (In spanish, last version: sept. 25)
+      </button>
+       <button class="doc-item" data-src="/docs/Notas_sobre_Campos_de_Jacobi.pdf#view=FitH" type="button">
+        Notes on the first variation formula, second variation formula and Jacobi fields (In spanish, last version: sept. 25)
+      </button>
+    </aside>
+
+    <div class="docs-viewer">
+      <div class="viewer-frame">
+        <iframe id="docsFrame"
+          src="/docs/Curriculum.pdf#view=FitH"
+          title="Visor de documento">
+        </iframe>
+      
+      </div>
+    </div>
+  </section>
+ 
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>© <span id="year"></span> Andrés Ahumada Gómez</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date();
+  </script>
+   
+   <script>
+  (function () {
+    const root = document.getElementById('docsComponent');
+    if (!root) return;
+
+    const frame = root.querySelector('#docsFrame');
+    const items = root.querySelectorAll('.doc-item');
+
+    items.forEach(button => {
+      button.addEventListener('click', function () {
+        const src = this.dataset.src;
+        if (!src) return;
+
+        frame.src = src;
+
+        items.forEach(btn => btn.classList.remove('is-active'));
+        this.classList.add('is-active');
+      });
+    });
+  })();
+</script>
+   <script>
+      (function () {
+  const root = document.getElementById('docsComponent');
+  if (!root) return;
+
+  const frame = root.querySelector('#docsFrame');
+  const items = root.querySelectorAll('.doc-item');
+
+  const isMobile = window.matchMedia("(max-width: 900px)").matches;
+
+  items.forEach(button => {
+    button.addEventListener('click', function () {
+      const src = this.dataset.src;
+      if (!src) return;
+
+      if (isMobile) {
+        // En móvil abre el PDF directamente
+        window.open(src.split('#')[0], "_blank");
+        return;
+      }
+
+      // En desktop usa el iframe
+      frame.src = src;
+
+      items.forEach(btn => btn.classList.remove('is-active'));
+      this.classList.add('is-active');
+    });
+  });
+})();
+   </script>
+</body>
+</html>
+
+
+<!--<iframe src="documento.pdf" width="100%" height="600px"></iframe>
+<a href="documento.pdf" target="_blank">Ver documento</a>-->
 
