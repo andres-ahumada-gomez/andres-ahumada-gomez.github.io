@@ -504,6 +504,17 @@ h3{
   font-size: 14px;
   transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
 }
+.doc-item {
+  color: #000000;          /* color normal del texto */
+  -webkit-appearance: none; /* elimina estilo iOS */
+  appearance: none;
+}
+
+.doc-item:focus,
+.doc-item:active {
+  color: #ffffff;          /* asegura color cuando se pulsa */
+}
+
 
 .doc-item:hover {
   background: #f3f4f6;
