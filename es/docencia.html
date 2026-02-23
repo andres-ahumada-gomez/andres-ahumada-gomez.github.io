@@ -1,65 +1,66 @@
+<!-- =========================
+   Andrés Ahumada Gómez — Docencia en español
+   ========================= -->
+
 <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Docencia — Andrés Ahumada Gómez</title>
-  <meta name="description" content="Clases de Andrés Ahumada Gómez." />
+  <title>Andrés - Docencia</title>
+  <meta name="description" content="Web profesional de Andrés Ahumada Gómez." />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=CMU+Serif&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono/index.css">
   <link rel="stylesheet" href="/styles.css" />
+  <link rel="alternate" hreflang="en" href="https://andres-hmd-gmz.github.io/en/" />
+<link rel="alternate" hreflang="es" href="https://andres-hmd-gmz.github.io/es/" />
+<link rel="alternate" hreflang="x-default" href="https://andres-hmd-gmz.github.io/" />
+   <link rel="icon" type="image/png" href="/imgs/esf.png">
 </head>
 <body>
-
   <header class="site-header">
   <a class="brand" href="/">
-  <img src="/andres-esf2.png" alt="Logo" class="brand-logo">
+  <img src="/imgs/andres-esf2.png" alt="Logo" class="brand-logo">
      
   Andrés Ahumada Gómez
   </a>
   <nav class="nav">
-    <a href="#sobre-mi">Sobre mí</a>
-    <a href="#contacto">Contacto</a>
-    <span style="margin-left:10px; opacity:.6;">|</span>
-    <a href="/en/">EN</a>
-    <a class="active" href="/es/">ES</a>
-  </nav>
+  <a href="/es/index.html#sobre-mi">Sobre mí</a>
+  <a href="/es/index.html#contacto">Contacto</a>
+
+  <span class="nav-sep" aria-hidden="true">|</span>
+
+  <div class="lang">
+    <a href="/en/investigacion.html">EN</a>
+    <a class="active" href="/es/investigacion.html">ES</a>
+  </div>
+</nav>
 </header>
-
   <main class="container">
-    <h1>Proyectos y Publicaciones</h1>
-    <p class="lead">
-      Selección de trabajos académicos y materiales docentes.
-    </p>
+    <div>
+    <h1><span class="accent">Docencia</span>.   </h1>
 
-    <section class="grid">
+  </div>
 
-      <article class="card">
-        <h2>Material docente en R</h2>
-        <p>
-          Desarrollo de recursos para la enseñanza de programación y análisis de datos
-          en grados universitarios.
-        </p>
-        <p>
-          <a href="https://github.com/andres-hmd-gmz" target="_blank">
-            Ver repositorios en GitHub
-          </a>
-        </p>
-      </article>
-<iframe 
-  src="/docs/SBC.pdf" 
-  width="100%" 
-  height="600"
-  style="border: none;">
-</iframe>
-      <article class="card">
-        <h2>Investigación aplicada</h2>
-        <p>
-          Proyectos centrados en análisis cuantitativo y aplicación práctica
-          en entornos académicos y profesionales.
-        </p>
-      <p>
-        Obtuve el doctorado en la Universidad Nacional Autónoma de México (UNAM) con la supervisión de Fernando Galaz García. Mi tesis está disponible aquí. Las esferas me parecen muy interesantes, para mi tesis de licenciatura estudié el Teorema clásico de la esfera de Berger, Klingenberg y Rauch. Después para mi tesina de maestría trabajé en un generalización del teorema anterior hecha por Grove y Shiohama.
-      </p>
-      </article>
+ 
+       </section>
+     <section class="section">
+   
+        <div class="card">
+          <h2>Curso 25-26</h2>
+          <ol>
+            <li><b>Gromov-Hausdorff convergence of metric pairs and metric tuples</b> (con Mauricio Che). <a href="https://doi.org/10.1016/j.difgeo.2024.102135">Differential Geometry and its Applications, Volume 94 (2024)</a><a href="">.</a> </li>
+          </ol>
+        </div>
+        <div class="card">
+          <h2>Pasados</h2>
+          <h1>CUNEF</h1>
+          <ol>
+            <li><b>Equivariant Smoothing Processes on Currents and Spaces with Bounded Curvature</b>. <a href="https://arxiv.org/abs/2407.14674">arXiv:2407.14674</a></li>
+            <li><b>Metric pairs and tuples in theory and applications</b> (con Mauricio Che and Manuel Cuerno). <a href="https://arxiv.org/abs/2505.12735">arXiv:2505.12735</a></li>
+          </ol>
+        </div>
 
     </section>
   </main>
@@ -71,8 +72,7 @@
   </footer>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date();
   </script>
-
 </body>
 </html>
