@@ -103,24 +103,37 @@
       });
     });
   })();
-
-const openLink = root.querySelector('#openPdf');
-
-items.forEach(button => {
-  button.addEventListener('click', function () {
-    const src = this.dataset.src;
-    if (!src) return;
-
-    frame.src = src;
-
-    // actualiza el link de "abrir"
-    if (openLink) openLink.href = src.split('#')[0];
-
-    items.forEach(btn => btn.classList.remove('is-active'));
-    this.classList.add('is-active');
-  });
-});
 </script>
+   <script>
+      (function () {
+  const root = document.getElementById('docsComponent');
+  if (!root) return;
+
+  const frame = root.querySelector('#docsFrame');
+  const items = root.querySelectorAll('.doc-item');
+
+  const isMobile = window.matchMedia("(max-width: 900px)").matches;
+
+  items.forEach(button => {
+    button.addEventListener('click', function () {
+      const src = this.dataset.src;
+      if (!src) return;
+
+      if (isMobile) {
+        // En móvil abre el PDF directamente
+        window.open(src.split('#')[0], "_blank");
+        return;
+      }
+
+      // En desktop usa el iframe
+      frame.src = src;
+
+      items.forEach(btn => btn.classList.remove('is-active'));
+      this.classList.add('is-active');
+    });
+  });
+})();
+   </script>
 </body>
 </html>
 
