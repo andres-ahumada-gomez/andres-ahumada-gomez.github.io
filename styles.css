@@ -560,3 +560,17 @@ h3{
   }
 }
 
+@media (max-width: 900px) {
+
+  .docs-component {
+    display: flex;
+    justify-content: center;
+  }
+
+  .docs-list {
+    width: 100%;
+    max-width: 420px;  /* controla ancho */
+  }
+
+}
+
