@@ -147,7 +147,7 @@ h3{
 
 .accent{
   color: var(--accent);
-  white-space: nowrap;
+  white-space: normal;
 }
 @media (max-width: 420px){
   h1 .accent{ white-space: normal; }
