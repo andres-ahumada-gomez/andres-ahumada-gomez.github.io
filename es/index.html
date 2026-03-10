@@ -17,43 +17,44 @@
   <link rel="alternate" hreflang="es" href="https://andres-ahumada-gomez.github.io/es/" />
   <link rel="alternate" hreflang="x-default" href="https://andres-ahumada-gomez.github.io/" />
   <link rel="icon" type="image/png" href="/imgs/esf.png">
+<style>
+  #intro-video {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 9999;
+    transition: opacity 3s ease;
+  }
 
-  <style>
-     #intro-video {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: 9999;
-      transition: opacity 3s ease;
-    }
+  #skip-btn {
+    position: fixed;
+    z-index: 10000;
+    bottom: 30px;
+    right: 30px;
 
-    #intro-btn {
-      position: fixed;
-      z-index: 10000;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    font-size: 15px;
+    font-family: "JetBrains Mono", monospace;
+    letter-spacing: 1px;
 
-      padding: 14px 30px;
-      font-size: 18px;
-      font-family: "JetBrains Mono", monospace;
-      letter-spacing: 1px;
+    color: white;
+    background-color: rgba(156, 31, 20, 0.7);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 
-      color: white;
-      background-color: #9C1F14;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+    transition: opacity 0.15s ease, background-color 0.2s ease;
+  }
 
-      transition: opacity 0.15s ease;
-     }
-     #intro-btn:hover {
-        background-color: #5a5d64;
-     }
-     body.intro-activa > *:not(#intro-video) {
-     visibility: hidden;
-     }
-  </style>
+  #skip-btn:hover {
+    background-color: #9C1F14;
+  }
+
+  body.intro-activa > *:not(#intro-video):not(#skip-btn) {
+    visibility: hidden;
+  }
+</style>
 </head>
 <body class="intro-activa">
    <video id="intro-video" autoplay muted playsinline>
@@ -243,24 +244,34 @@
     video.style.opacity = '0';
     setTimeout(() => {
       video.style.display = 'none';
-      video.src = ''; // 👈 libera el vídeo de memoria
+      video.src = '';
     }, 1000);
   }
 
   if (sessionStorage.getItem('introVisto')) {
-    // Elimina el vídeo del DOM completamente antes de que se renderice
     video.removeAttribute('src');
-    video.load(); // 👈 cancela cualquier carga
-    video.remove(); // 👈 lo elimina del DOM
+    video.load();
+    video.remove();
     document.body.classList.remove('intro-activa');
   } else {
-    video.play().catch(() => {
-      // ... botón igual que antes
+    video.play();
+
+    // Botón para saltar la intro
+    const skipBtn = document.createElement('button');
+    skipBtn.id = 'skip-btn';
+    skipBtn.textContent = 'Saltar';
+    document.body.appendChild(skipBtn);
+
+    skipBtn.addEventListener('click', () => {
+      sessionStorage.setItem('introVisto', 'true');
+      skipBtn.remove();
+      fadeOutVideo();
     });
 
     video.addEventListener('timeupdate', () => {
       if (video.duration && video.currentTime >= video.duration - 3) {
         sessionStorage.setItem('introVisto', 'true');
+        skipBtn.remove();
         fadeOutVideo();
       }
     });
