@@ -19,13 +19,12 @@
   <link rel="icon" type="image/png" href="/imgs/esf.png">
 <style>
   #intro-video {
-    position: center;
-    margin: 0;
+    position: fixed;
+    top: 0; left: 0;
     width: 100%; height: 100%;
     object-fit: cover;
     z-index: 9999;
     transition: opacity 3s ease;
-     size: contain;
   }
 
   #skip-btn {
@@ -52,29 +51,7 @@
     background-color: rgba(255, 255, 255, 0.15);
   }
 
-  #sound-btn {
-    position: fixed;
-    z-index: 10000;
-    bottom: 30px;
-    left: 30px;
-
-    padding: 10px 14px;
-    font-size: 18px;
-
-    color: white;
-    background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 8px;
-    cursor: pointer;
-
-    transition: background-color 0.2s ease;
-  }
-
-  #sound-btn:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-  }
-
-  body.intro-activa > *:not(#intro-video):not(#skip-btn):not(#sound-btn) {
+  body.intro-activa > *:not(#intro-video):not(#skip-btn) {
     visibility: hidden;
   }
 </style>
@@ -266,9 +243,7 @@
     document.body.classList.remove('intro-activa');
 
     const skipBtn = document.getElementById('skip-btn');
-    const soundBtn = document.getElementById('sound-btn');
     if (skipBtn) skipBtn.remove();
-    if (soundBtn) soundBtn.remove();
 
     video.style.opacity = '0';
     setTimeout(() => {
@@ -294,17 +269,6 @@
     skipBtn.addEventListener('click', () => {
       sessionStorage.setItem('introVisto', 'true');
       fadeOutVideo();
-    });
-
-    // Botón sonido
-    const soundBtn = document.createElement('button');
-    soundBtn.id = 'sound-btn';
-    soundBtn.textContent = '🔇';
-    document.body.appendChild(soundBtn);
-
-    soundBtn.addEventListener('click', () => {
-      video.muted = !video.muted;
-      soundBtn.textContent = video.muted ? '🔇' : '🔊';
     });
 
     // Fin del vídeo
