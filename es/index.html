@@ -20,34 +20,32 @@
 
   <style>
      #intro-video {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 9999;
-        transition: opacity 1s ease;
-     }
-     #intro-btn {
-        position: fixed;
-        z-index: 10000;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 9999;
+      transition: opacity 1s ease;
+    }
 
-        padding: 14px 30px;
-        font-size: 18px;
-        font-family: "JetBrains Mono", monospace;
-        letter-spacing: 1px;
+    #intro-btn {
+      position: fixed;
+      z-index: 10000;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
 
-        color: white;
-        background: #9C1F14;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
+      padding: 14px 30px;
+      font-size: 18px;
+      font-family: "JetBrains Mono", monospace;
+      letter-spacing: 1px;
 
-        transition: opacity 0.15s ease;
+      color: white;
+      background-color: #9C1F14;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+
+      transition: opacity 0.15s ease;
      }
      #intro-btn:hover {
         background-color: #5a5d64;
@@ -232,21 +230,40 @@
     document.getElementById("year").textContent = new Date();
   </script>
    <script>
-    const video = document.getElementById('intro-video');
+  const video = document.getElementById('intro-video');
+  let fadeDone = false;
 
-    // Intenta reproducir automáticamente
-    video.play().catch(() => {
-      // Solo si el autoplay falla, crea el botón
-      const btn = document.createElement('button');
-      btn.id = 'intro-btn';
-      btn.textContent = 'Entrar';
-      document.body.appendChild(btn);
+  function fadeOutVideo() {
+    if (fadeDone) return;
+    fadeDone = true;
+    video.style.opacity = '0';
+    setTimeout(() => video.style.display = 'none', 1000);
+  }
 
-      btn.addEventListener('click', () => {
-        btn.style.opacity = '0';           // fade out rápido del botón
-        setTimeout(() => {
-          btn.remove()
-      
-   </script>
+  video.play().catch(() => {
+    const btn = document.createElement('button');
+    btn.id = 'intro-btn';
+    btn.textContent = 'Entrar';
+    document.body.appendChild(btn);
+
+    btn.addEventListener('click', () => {
+      btn.style.opacity = '0';
+      setTimeout(() => {
+        btn.remove();
+        video.play();
+      }, 150);
+    });
+  });
+
+  // Dispara el fade cuando queda menos de 0.3s
+  video.addEventListener('timeupdate', () => {
+    if (video.duration && video.currentTime >= video.duration - 0.3) {
+      fadeOutVideo();
+    }
+  });
+
+  // Por si acaso, también escucha ended
+  video.addEventListener('ended', fadeOutVideo);
+</script>
 </body>
 </html>
