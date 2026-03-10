@@ -40,7 +40,7 @@
 
     color: white;
     background-color: transparent;
-    border: 1px solid rgba(255,255,255,0.6);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 8px;
     cursor: pointer;
 
@@ -48,10 +48,32 @@
   }
 
   #skip-btn:hover {
-    background-color: rgba(255,255,255,0.15);
+    background-color: rgba(255, 255, 255, 0.15);
   }
 
-  body.intro-activa > *:not(#intro-video):not(#skip-btn) {
+  #sound-btn {
+    position: fixed;
+    z-index: 10000;
+    bottom: 30px;
+    left: 30px;
+
+    padding: 10px 14px;
+    font-size: 18px;
+
+    color: white;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+  }
+
+  #sound-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  body.intro-activa > *:not(#intro-video):not(#skip-btn):not(#sound-btn) {
     visibility: hidden;
   }
 </style>
@@ -241,6 +263,12 @@
     if (fadeDone) return;
     fadeDone = true;
     document.body.classList.remove('intro-activa');
+
+    const skipBtn = document.getElementById('skip-btn');
+    const soundBtn = document.getElementById('sound-btn');
+    if (skipBtn) skipBtn.remove();
+    if (soundBtn) soundBtn.remove();
+
     video.style.opacity = '0';
     setTimeout(() => {
       video.style.display = 'none';
@@ -256,7 +284,7 @@
   } else {
     video.play();
 
-    // Botón para saltar la intro
+    // Botón saltar
     const skipBtn = document.createElement('button');
     skipBtn.id = 'skip-btn';
     skipBtn.textContent = 'Saltar';
@@ -264,19 +292,34 @@
 
     skipBtn.addEventListener('click', () => {
       sessionStorage.setItem('introVisto', 'true');
-      skipBtn.remove();
       fadeOutVideo();
     });
 
+    // Botón sonido
+    const soundBtn = document.createElement('button');
+    soundBtn.id = 'sound-btn';
+    soundBtn.textContent = '🔇';
+    document.body.appendChild(soundBtn);
+
+    soundBtn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      soundBtn.textContent = video.muted ? '🔇' : '🔊';
+    });
+
+    // Fin del vídeo
+    video.addEventListener('ended', fadeOutVideo);
+
     video.addEventListener('timeupdate', () => {
-      if (video.duration && video.currentTime >= video.duration - 3) {
+      if (video.duration && video.currentTime >= video.duration - 0.5) {
         sessionStorage.setItem('introVisto', 'true');
-        skipBtn.remove();
         fadeOutVideo();
       }
     });
 
-    video.addEventListener('ended', fadeOutVideo);
+    // Seguridad: fuerza el fade si ended nunca se dispara
+    video.addEventListener('loadedmetadata', () => {
+      setTimeout(fadeOutVideo, (video.duration + 1) * 1000);
+    });
   }
 </script>
 </body>
