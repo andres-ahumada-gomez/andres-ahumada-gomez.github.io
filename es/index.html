@@ -257,7 +257,7 @@
     setTimeout(() => {
       video.style.display = 'none';
       video.src = '';
-    }, 1000);
+    }, 3000);
   }
 
   if (sessionStorage.getItem('introVisto')) {
@@ -266,7 +266,10 @@
     video.remove();
     document.body.classList.remove('intro-activa');
   } else {
-    video.play();
+    // Espera a que el vídeo esté listo antes de reproducir
+    video.addEventListener('canplay', () => {
+      video.play().catch(() => {});
+    });
 
     // Botón saltar
     const skipBtn = document.createElement('button');
@@ -279,7 +282,6 @@
       fadeOutVideo();
     });
 
-    // Fin del vídeo
     video.addEventListener('ended', fadeOutVideo);
 
     video.addEventListener('timeupdate', () => {
@@ -289,7 +291,6 @@
       }
     });
 
-    // Seguridad: fuerza el fade si ended nunca se dispara
     video.addEventListener('loadedmetadata', () => {
       setTimeout(fadeOutVideo, (video.duration + 1) * 1000);
     });
