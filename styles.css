@@ -687,7 +687,7 @@ main .section.contact-grid .contact-item p{
 .viewer-frame--video {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: #000;
+  background: #FFFFFF;
   border-radius: 12px;
   overflow: hidden;
 }
@@ -697,5 +697,5 @@ main .section.contact-grid .contact-item p{
   height: 100%;
   display: block;
   object-fit: contain;
-  background: #000;
+  background: #FFF;
 }
