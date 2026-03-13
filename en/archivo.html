@@ -78,6 +78,24 @@
       </div>
     </div>
   </section>
+     <section class="docs-component docs-component--fullbleed" id="animationsComponent">
+  <aside class="docs-list">
+    <h2 class="docs-title">Animaciones</h2>
+
+    <button class="doc-item is-active" data-src="/vids/esfera.mp4" type="button">
+      Animación esfera
+    </button>
+  </aside>
+
+  <div class="docs-viewer">
+    <div class="viewer-frame viewer-frame--video">
+      <video id="animationsFrame" controls playsinline preload="metadata">
+        <source src="/vids/esfera.mp4" type="video/mp4">
+        Tu navegador no soporta video HTML5.
+      </video>
+    </div>
+  </div>
+</section>
  
   </main>
 
@@ -142,6 +160,29 @@
   });
 })();
    </script>
+      <script>
+  (function () {
+    const root = document.getElementById('animationsComponent');
+    if (!root) return;
+
+    const frame = root.querySelector('#animationsFrame');
+    const source = frame.querySelector('source');
+    const items = root.querySelectorAll('.doc-item');
+
+    items.forEach(button => {
+      button.addEventListener('click', function () {
+        const src = this.dataset.src;
+        if (!src) return;
+
+        source.src = src;
+        frame.load();
+
+        items.forEach(btn => btn.classList.remove('is-active'));
+        this.classList.add('is-active');
+      });
+    });
+  })();
+</script>
 </body>
 </html>
 
