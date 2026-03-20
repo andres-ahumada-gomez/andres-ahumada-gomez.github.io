@@ -81,6 +81,9 @@
     <button class="doc-item is-active" data-src="/vids/esfera.mp4" type="button">
       Animación esfera (Manim - Python)
     </button>
+     <button class="doc-item" data-type="sphere" type="button">
+  Esfera interactiva (HTML)
+</button>
   </aside>
 
   <div class="docs-viewer">
@@ -89,6 +92,7 @@
         <source src="/vids/esfera.mp4" type="video/mp4">
         Tu navegador no soporta video HTML5.
       </video>
+       <canvas id="sphereCanvas" style="display:none;"></canvas>
     </div>
   </div>
 </section>
@@ -158,27 +162,190 @@
    </script>
 
    <script>
-  (function () {
-    const root = document.getElementById('animationsComponent');
-    if (!root) return;
+ (function () {
+  const root = document.getElementById('animationsComponent');
+  if (!root) return;
 
-    const frame = root.querySelector('#animationsFrame');
-    const source = frame.querySelector('source');
-    const items = root.querySelectorAll('.doc-item');
+  const video = root.querySelector('#animationsFrame');
+  const source = video.querySelector('source');
+  const canvas = root.querySelector('#sphereCanvas');
+  const items = root.querySelectorAll('.doc-item');
 
-    items.forEach(button => {
-      button.addEventListener('click', function () {
-        const src = this.dataset.src;
-        if (!src) return;
+  items.forEach(button => {
+    button.addEventListener('click', function () {
+      const type = this.dataset.type;
+      const src = this.dataset.src;
 
+      // 🔁 RESET
+      video.style.display = "none";
+      canvas.style.display = "none";
+
+      // 🎥 VIDEO
+      if (src) {
         source.src = src;
-        frame.load();
+        video.style.display = "block";
+        video.load();
+      }
 
-        items.forEach(btn => btn.classList.remove('is-active'));
-        this.classList.add('is-active');
-      });
+      // 🟡 ESFERA
+      if (type === "sphere") {
+        canvas.style.display = "block";
+        initSphere(); // lanzar animación
+      }
+
+      items.forEach(btn => btn.classList.remove('is-active'));
+      this.classList.add('is-active');
     });
-  })();
+  });
+})();
+</script>
+
+   <script>
+function initSphere() {
+  const canvas = document.getElementById("sphereCanvas");
+  if (!canvas || canvas._initialized) return;
+
+  canvas._initialized = true;
+  const ctx = canvas.getContext("2d");
+
+  function resize() {
+    const parent = canvas.parentElement;
+    canvas.width = parent.clientWidth;
+    canvas.height = parent.clientHeight;
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+
+  const palette = [
+    "#5a4500",
+    "#8c6a00",
+    "#c99a00",
+    "#ffcc00",
+    "#ffd84d"
+  ];
+
+  const points = [];
+  const sphereRadius = 85;
+  const totalPoints = 1300;
+  const basePixelSize = 2;
+  const cameraDistance = 320;
+
+  const mouse = { normX: 0, normY: 0 };
+
+  window.addEventListener("mousemove", (e) => {
+    mouse.normX = (e.clientX / window.innerWidth) * 2 - 1;
+    mouse.normY = (e.clientY / window.innerHeight) * 2 - 1;
+  });
+
+  function createSpherePoints() {
+    for (let i = 0; i < totalPoints; i++) {
+      const u = Math.random();
+      const v = Math.random();
+
+      const theta = 2 * Math.PI * u;
+      const phi = Math.acos(2 * v - 1);
+
+      points.push({
+        x: sphereRadius * Math.sin(phi) * Math.cos(theta),
+        y: sphereRadius * Math.sin(phi) * Math.sin(theta),
+        z: sphereRadius * Math.cos(phi)
+      });
+    }
+  }
+
+  function rotateY(p, a) {
+    return {
+      x: p.x * Math.cos(a) - p.z * Math.sin(a),
+      y: p.y,
+      z: p.x * Math.sin(a) + p.z * Math.cos(a)
+    };
+  }
+
+  function rotateX(p, a) {
+    return {
+      x: p.x,
+      y: p.y * Math.cos(a) - p.z * Math.sin(a),
+      z: p.y * Math.sin(a) + p.z * Math.cos(a)
+    };
+  }
+
+  function quantizeColor(z, light) {
+    const value = light - z * 0.18;
+    if (value < 40) return palette[0];
+    if (value < 80) return palette[1];
+    if (value < 120) return palette[2];
+    if (value < 165) return palette[3];
+    return palette[4];
+  }
+
+  const ball = {
+    x: canvas.width * 0.5,
+    y: canvas.height * 0.35,
+    vx: 3.5,
+    vy: 2.8,
+    rotY: 0,
+    rotX: 0.3
+  };
+
+  function draw() {
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const minX = 120;
+    const maxX = canvas.width - 120;
+    const minY = 100;
+    const maxY = canvas.height - 110;
+
+    ball.x += ball.vx;
+    ball.y += ball.vy;
+
+    if (ball.x <= minX || ball.x >= maxX) ball.vx *= -1;
+    if (ball.y <= minY || ball.y >= maxY) ball.vy *= -1;
+
+    ball.rotY += 0.04;
+    ball.rotX += 0.015;
+
+    const rendered = [];
+
+    for (const p of points) {
+      let rp = rotateY(p, ball.rotY + mouse.normX);
+      rp = rotateX(rp, ball.rotX + mouse.normY);
+
+      const perspective = cameraDistance / (cameraDistance - rp.z);
+
+      const sx = rp.x * perspective + ball.x;
+      const sy = rp.y * perspective + ball.y;
+
+      const light = 150 + (-rp.x * 0.25) + (-rp.y * 0.15);
+
+      rendered.push({
+        x: sx,
+        y: sy,
+        z: rp.z,
+        size: Math.max(1, Math.floor(basePixelSize * perspective)),
+        color: quantizeColor(rp.z, light)
+      });
+    }
+
+    rendered.sort((a, b) => a.z - b.z);
+
+    for (const p of rendered) {
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.x, p.y, p.size, p.size);
+
+      if (p.z > sphereRadius * 0.45) {
+        ctx.fillStyle = "#ffe680";
+        ctx.fillRect(p.x, p.y, 2, 2);
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  createSpherePoints();
+  draw();
+}
 </script>
 </body>
 </html>
