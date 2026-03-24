@@ -556,7 +556,7 @@ h3{
 }
 
 @media (max-width: 900px) {
-  .docs-viewer {
+  .docs-pdf-component .docs-viewer {
     display: none;
   }
 }
