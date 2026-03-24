@@ -212,15 +212,6 @@ function initSphere() {
   canvas._initialized = true;
   const ctx = canvas.getContext("2d");
 
-  function resize() {
-    const parent = canvas.parentElement;
-    canvas.width = parent.clientWidth;
-    canvas.height = parent.clientHeight;
-  }
-
-  resize();
-  window.addEventListener("resize", resize);
-
   const palette = [
     "#5a4500",
     "#8c6a00",
@@ -230,19 +221,41 @@ function initSphere() {
   ];
 
   const points = [];
-  const sphereRadius = 85;
-  const totalPoints = 1300;
+  let sphereRadius = 85;
+  let totalPoints = window.matchMedia("(max-width: 900px)").matches ? 700 : 1300;
   const basePixelSize = 2;
-  const cameraDistance = 320;
+  let cameraDistance = 320;
 
   const mouse = { normX: 0, normY: 0 };
+
+  function resize() {
+    const parent = canvas.parentElement;
+    canvas.width = parent.clientWidth;
+    canvas.height = parent.clientHeight;
+
+    const minSide = Math.min(canvas.width, canvas.height);
+    sphereRadius = Math.max(42, minSide * 0.18);
+    cameraDistance = Math.max(180, minSide * 0.75);
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
 
   window.addEventListener("mousemove", (e) => {
     mouse.normX = (e.clientX / window.innerWidth) * 2 - 1;
     mouse.normY = (e.clientY / window.innerHeight) * 2 - 1;
   });
 
+  window.addEventListener("touchmove", (e) => {
+    if (!e.touches || !e.touches.length) return;
+    const t = e.touches[0];
+    mouse.normX = (t.clientX / window.innerWidth) * 2 - 1;
+    mouse.normY = (t.clientY / window.innerHeight) * 2 - 1;
+  }, { passive: true });
+
   function createSpherePoints() {
+    points.length = 0;
+
     for (let i = 0; i < totalPoints; i++) {
       const u = Math.random();
       const v = Math.random();
@@ -285,21 +298,26 @@ function initSphere() {
 
   const ball = {
     x: canvas.width * 0.5,
-    y: canvas.height * 0.35,
-    vx: 3.5,
-    vy: 2.8,
+    y: canvas.height * 0.5,
+    vx: 2.2,
+    vy: 1.8,
     rotY: 0,
     rotX: 0.3
   };
+
+  createSpherePoints();
 
   function draw() {
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const minX = 120;
-    const maxX = canvas.width - 120;
-    const minY = 100;
-    const maxY = canvas.height - 110;
+    const marginX = Math.max(30, canvas.width * 0.12);
+    const marginY = Math.max(30, canvas.height * 0.12);
+
+    const minX = marginX;
+    const maxX = canvas.width - marginX;
+    const minY = marginY;
+    const maxY = canvas.height - marginY;
 
     ball.x += ball.vx;
     ball.y += ball.vy;
@@ -313,8 +331,8 @@ function initSphere() {
     const rendered = [];
 
     for (const p of points) {
-      let rp = rotateY(p, ball.rotY + mouse.normX);
-      rp = rotateX(rp, ball.rotX + mouse.normY);
+      let rp = rotateY(p, ball.rotY + mouse.normX * 0.6);
+      rp = rotateX(rp, ball.rotX + mouse.normY * 0.6);
 
       const perspective = cameraDistance / (cameraDistance - rp.z);
 
@@ -347,7 +365,6 @@ function initSphere() {
     requestAnimationFrame(draw);
   }
 
-  createSpherePoints();
   draw();
 }
 </script>
